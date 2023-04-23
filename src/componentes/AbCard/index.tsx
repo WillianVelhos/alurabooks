@@ -13,7 +13,6 @@ const CardEstilizado = styled.div`
     border-radius: 10px;
 `;
 
-
 export const AbCard = ({ children }: AbCardOpcao) => {
     return (
         <CardEstilizado>
