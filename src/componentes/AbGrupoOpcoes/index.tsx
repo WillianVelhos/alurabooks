@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 import styled from "styled-components";
 
 const SectionEstilizada = styled.section<{ selecionado: boolean }>`
@@ -31,7 +31,6 @@ const SectionEstilizada = styled.section<{ selecionado: boolean }>`
         font-size: 12px;
     }
 `
-
 export interface AbGrupoOpcao {
     id: number
     titulo: string
@@ -45,33 +44,28 @@ export interface AbGrupoOpcoesProps {
     onChange?: (opcao: AbGrupoOpcao) => void
 }
 
-export const AbGrupoOpcoes = ({ opcoes, onChange , valorPadrao} : AbGrupoOpcoesProps) => {
-    const [selecao, setSelecao] = useState<AbGrupoOpcao | null>(valorPadrao ?? null)
-    const aoSelecionar = (opcao: AbGrupoOpcao): void => {
-        setSelecao(opcao);
-        if (onChange) {
-            onChange(opcao)
-        }
+export const AbGrupoAcoes = ({ opcoes }: AbGrupoOpcoesProps) => {
+    const [selecionado, setSelecionado] = useState<AbGrupoOpcao | null>(null)
+
+    const aoSelecionar = (opcao: AbGrupoOpcao) => {
+        setSelecionado(opcao);
     }
-    
+
     return (<>
-        {opcoes.map(opcao => 
-            <SectionEstilizada
-                onClick={() => aoSelecionar(opcao)}
-                key={opcao.id}
-                selecionado={selecao?.id == opcao.id}
-            >
+        {opcoes.map(opcao =>
+            <SectionEstilizada key={opcao.id} onClick={() => aoSelecionar(opcao)} selecionado={selecionado?.id === opcao.id}>
                 <header>
                     {opcao.titulo}
                 </header>
                 <div>
-                    <strong>{opcao.corpo}</strong>
+                    <strong> {opcao.corpo} </strong>
                 </div>
                 <footer>
                     {opcao.rodape}
                 </footer>
             </SectionEstilizada>
-        )}
-    </>)
+        )
+        }
+    </>
+    )
 }
-
